@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace MyFirstWebServer.Server.Http
 {
-    internal class StatusCode
+    public enum StatusCode
     {
+        OK = 200
     }
 }

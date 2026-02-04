@@ -12,35 +12,40 @@ namespace MyFirstWebServer.Server
 
         public HttpServer(string ipAddress, int port)
         {
+
             this.ipAddress = IPAddress.Parse(ipAddress);
             this.port = port;
-            this.serverListener = new TcpListener(this.ipAddress, this.port);
-        }
+            this.serverListener = new TcpListener(this.ipAddress, port);
 
+        }
         public void Start()
         {
-            serverListener.Start();
-            Console.WriteLine($"Server started on port {port}");
-            Console.WriteLine($"Listening for requests");
+            this.serverListener.Start();
 
+            Console.WriteLine($"Server started on port {port}");
+            Console.WriteLine("Listening for requests ... ");
             while (true)
             {
                 var connection = serverListener.AcceptTcpClient();
                 var networkStream = connection.GetStream();
-                WriteResponse(networkStream, "Hello from the server");
+                WriteResponse(networkStream, "Hello from the server!");
                 connection.Close();
             }
         }
-        public void WriteResponse(NetworkStream networkStream, string message)
+        private void WriteResponse(NetworkStream networkStream, string message)
         {
-            int contentLength = Encoding.UTF8.GetByteCount(message);
-            var response = $@"HTTP/1.1
-Content-Type : text/plain; charset=UTF-8
+
+            var contentLength = Encoding.UTF8.GetByteCount(message);
+
+            var response = $@"HTTP/1.1 200 OK
+Content-Type: text/plain; charset=UTF-8
 Content-Length: {contentLength}
 
 {message}";
-            var responseBytes = Encoding.UTF8.GetBytes(response);
-            networkStream.Write(responseBytes);
+
+            var resposeBytes = Encoding.UTF8.GetBytes(response);
+
+            networkStream.Write(resposeBytes);
         }
     }
 }
