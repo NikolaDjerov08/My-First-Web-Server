@@ -1,11 +1,11 @@
-﻿using MyFirstWebServer.Server.Http;
+﻿using MyFirstWebServer.Server.HTTPRequest;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyFirstWebServer.Server.HTTPRequest
+namespace MyFirstWebServer.Server.Http
 {
     public class Request
     {
@@ -44,7 +44,6 @@ namespace MyFirstWebServer.Server.HTTPRequest
             catch (Exception)
             {
                 throw new InvalidOperationException($"Method '{method}' is not supportrd");
-
             }
         }
         private static HeaderCollection ParseHeaders(IEnumerable<string> headerLines)

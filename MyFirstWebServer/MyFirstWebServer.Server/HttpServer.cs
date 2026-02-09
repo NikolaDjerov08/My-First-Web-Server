@@ -9,14 +9,12 @@ namespace MyFirstWebServer.Server
         private readonly IPAddress ipAddress;
         private readonly int port;
         private readonly TcpListener serverListener;
-
         public HttpServer(string ipAddress, int port)
         {
 
             this.ipAddress = IPAddress.Parse(ipAddress);
             this.port = port;
             this.serverListener = new TcpListener(this.ipAddress, port);
-
         }
         public void Start()
         {
@@ -28,13 +26,13 @@ namespace MyFirstWebServer.Server
             {
                 var connection = serverListener.AcceptTcpClient();
                 var networkStream = connection.GetStream();
-                WriteResponse(networkStream, "Hello from the server!");
-                connection.Close();
+                var requestText = this.ReadRequest(networkStream);
+                Console.WriteLine(requestText);
+
             }
         }
         private void WriteResponse(NetworkStream networkStream, string message)
         {
-
             var contentLength = Encoding.UTF8.GetByteCount(message);
 
             var response = $@"HTTP/1.1 200 OK
@@ -46,6 +44,20 @@ Content-Length: {contentLength}
             var resposeBytes = Encoding.UTF8.GetBytes(response);
 
             networkStream.Write(resposeBytes);
+        }
+        private string ReadRequest(NetworkStream networkStream)
+        {
+            var bufferLingth = 1024;
+            var buffer = new byte[bufferLingth];
+            var requestBuilder = new StringBuilder();
+            do
+            {
+                var bytesRead = networkStream.Read(buffer, 0, bufferLingth);
+                requestBuilder.Append(Encoding.UTF8.GetString(buffer, 0, bytesRead));
+            }
+            while (networkStream.DataAvailable);
+
+            return requestBuilder.ToString();
         }
     }
 }
