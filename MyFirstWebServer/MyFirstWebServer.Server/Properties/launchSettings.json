@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MyFirstWebServer.Server.Properties
-{
-    class launchSettings
-    {
+﻿{
+  "profiles": {
+    "WebServer.Server": {
+      "commandName": "Project",
+      "workingDirectory": "C:\\Users\\nikola\\Documents\\GitHub\\My-First-Web-Server\\MyFirstWebServer"
     }
+  }
 }
