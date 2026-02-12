@@ -6,12 +6,7 @@ using System.Threading.Tasks;
 
 namespace MyFirstWebServer.Server.Http
 {
-    public enum StatusCode
+    internal class RoutingTable
     {
-        OK = 200,
-        Found = 302,
-        BadRequest = 400,
-        Unauthorized = 401,
-        NotFound = 404
     }
 }

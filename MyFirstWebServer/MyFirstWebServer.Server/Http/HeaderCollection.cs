@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,5 +21,7 @@ namespace MyFirstWebServer.Server.Http
             var headers = new Header(name, value);
             this.headers.Add(name, headers);
         }
+        public IEnumerator<Header> GetEnumerator()
+        => this.headers.Values.GetEnumerator();
     }
 }
