@@ -7,7 +7,7 @@ using MyFirstWebServer.Server.Http;
 
 namespace MyFirstWebServer.Server.Responses
 {
-    public class BadRequestResponse : HTTP_Request.Response
+    public class BadRequestResponse : Response
     {
         public BadRequestResponse()
             : base(StatusCode.BadRequest)

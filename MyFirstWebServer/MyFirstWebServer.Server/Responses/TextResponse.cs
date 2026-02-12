@@ -10,9 +10,8 @@ namespace MyFirstWebServer.Server.Responses
     public class TextResponse : ContentResponse
     {
         public TextResponse(string text)
-      : base(text, ContentType.PlainText)
+            : base(text, ContentType.PlainText)
         {
-
         }
     }
 }

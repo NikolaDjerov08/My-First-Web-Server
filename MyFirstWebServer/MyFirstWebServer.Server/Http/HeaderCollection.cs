@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MyFirstWebServer.Server.Http
 {
-    public class HeaderCollection
+    public class HeaderCollection : IEnumerable<Header>
     {
         private readonly Dictionary<string, Header> headers;
         public HeaderCollection()
@@ -21,7 +21,15 @@ namespace MyFirstWebServer.Server.Http
             var headers = new Header(name, value);
             this.headers.Add(name, headers);
         }
+
         public IEnumerator<Header> GetEnumerator()
-        => this.headers.Values.GetEnumerator();
+        {
+            return headers.Values.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
     }
 }

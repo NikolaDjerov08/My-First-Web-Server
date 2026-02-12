@@ -17,9 +17,13 @@ namespace MyFirstWebServer.Server.Http
         {
             var lines = request.Split("\r\n");
             var startLine = lines.First().Split(" ");
+
             var method = ParseMethod(startLine[0]);
+
             var url = startLine[1];
+
             var headers = ParseHeaders(lines.Skip(1));
+
             var bodyLines = lines.Skip(headers.Count + 2).ToArray();
             var body = string.Join("\r\n", bodyLines);
 

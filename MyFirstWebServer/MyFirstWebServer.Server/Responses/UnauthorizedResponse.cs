@@ -9,7 +9,8 @@ namespace MyFirstWebServer.Server.Responses
 {
     public class UnauthorizedResponse : Response
     {
-        public UnauthorizedResponse(StatusCode statusCode) : base(statusCode)
+        public UnauthorizedResponse()
+            : base(StatusCode.Unauthorized)
         {
         }
     }

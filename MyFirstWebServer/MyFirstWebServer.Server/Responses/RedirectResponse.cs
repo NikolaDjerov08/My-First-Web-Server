@@ -9,9 +9,11 @@ namespace MyFirstWebServer.Server.Responses
 {
     public class RedirectResponse : Response
     {
-        public RedirectResponse(string location) : base(StatusCode.Found)
+        public RedirectResponse(string location)
+            : base(StatusCode.Found)
         {
-            Headers.Add(Header.Location, location)
+            this.Headers.Add(Header.Location, location);
         }
     }
+
 }
