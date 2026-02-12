@@ -32,7 +32,7 @@ namespace MyFirstWebServer.Server.Http
         //        [Method.Put] = new(),
         //        [Method.Delete] = new()
         //    };
-        //}                                //Алтернатива
+        //}                               \
 
         public IRoutingTable Map(string url, Method method, Response response)
         //=> method switch
@@ -53,7 +53,6 @@ namespace MyFirstWebServer.Server.Http
             }
 
         }
-
         public IRoutingTable MapGet(string url, Response response)
         {
             Guard.AgainstNull(url, nameof(url));
