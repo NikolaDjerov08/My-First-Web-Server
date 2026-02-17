@@ -12,32 +12,24 @@ namespace MyFirstWebServer.Server
         private readonly int port;
         private readonly TcpListener serverListener;
         private readonly RoutingTable routingTable;
-
         public HttpServer(string ipAddress, int port, Action<IRoutingTable> routingTableConfiguration)
         {
-
             this.ipAddress = IPAddress.Parse(ipAddress);
             this.port = port;
             this.serverListener = new TcpListener(this.ipAddress, port);
-
             routingTableConfiguration(this.routingTable = new RoutingTable());
-
         }
-
         public HttpServer(int port, Action<IRoutingTable> routes)
             : this("127.0.0.1", port, routes)
         {
         }
-
         public HttpServer(Action<IRoutingTable> routingTable)
             : this(8080, routingTable)
         {
         }
-
         public void Start()
         {
             this.serverListener.Start();
-
             Console.WriteLine($"Server started on port {port}");
             Console.WriteLine("Listening for requests ... ");
             while (true)
