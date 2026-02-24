@@ -14,26 +14,17 @@ namespace MyFirstWebServer.Server.Http
         public string Url { get; private set; }
         public HeaderCollection Headers { get; private set; }
         public string Body { get; private set; }
-
-        // Ensure FromData is never null by default to avoid NREs when consumers iterate it.
         public IReadOnlyDictionary<string, string> FromData { get; private set; } = new Dictionary<string, string>();
-
         public static Request Parse(string request)
         {
             var lines = request.Split("\r\n");
             var startLine = lines.First().Split(" ");
-
             var method = ParseMethod(startLine[0]);
-
             var url = startLine[1];
-
             var headers = ParseHeaders(lines.Skip(1));
-
             var bodyLines = lines.Skip(headers.Count + 2).ToArray();
             var body = string.Join("\r\n", bodyLines);
-
             var form = ParseForm(headers, body);
-
             return new Request
             {
                 Method = method,
@@ -67,7 +58,6 @@ namespace MyFirstWebServer.Server.Http
                 if (headerParts.Length != 2)
                 {
                     throw new InvalidOperationException("Request is not valid.");
-
                 }
 
                 var headerName = headerParts[0];
@@ -77,7 +67,6 @@ namespace MyFirstWebServer.Server.Http
             }
             return headers;
         }
-
         private static Dictionary<string, string> ParseForm(HeaderCollection headers, string body)
         {
             var formCollection = new Dictionary<string, string>();
@@ -92,7 +81,6 @@ namespace MyFirstWebServer.Server.Http
                     formCollection.Add(name, value);
                 }
             }
-
             return formCollection;
         }
         private static Dictionary<string, string> ParseFormData(string bodyLines)
@@ -113,7 +101,6 @@ namespace MyFirstWebServer.Server.Http
                     formData[name] = value;
                 }
             }
-
             return formData;
         }
 

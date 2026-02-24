@@ -13,5 +13,11 @@ namespace MyFirstWebServer.Server.Views
             Age: <input type='number' name='Age'/>
             <input type='submit' value='Save' />
         </form>";
+
+        public const string DownloadForm = @"<form action='/Content' method='POST' >
+            <input type='submit' value ='Download Sites Content' />
+        </form>";
+
+        public const string FileName = "content.txt";
     }
 }

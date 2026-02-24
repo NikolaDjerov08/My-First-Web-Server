@@ -11,6 +11,7 @@ namespace MyFirstWebServer.Server.Http
     {
         public const string ContentType = "Content-Type";
         public const string ContentLength = "Content-Length";
+        public const string ContentDisposition = "Content-Disposition";
         public const string Data = "Data";
         public const string Location = "Location";
         public const string Server = "Server";
@@ -25,7 +26,6 @@ namespace MyFirstWebServer.Server.Http
         }
         public string Name { get; init; }
         public string Value { get; set; }
-
         public override string ToString()
         {
             return $"{this.Name}: {this.Value}";
