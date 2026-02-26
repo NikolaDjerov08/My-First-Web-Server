@@ -11,6 +11,7 @@ namespace MyFirstWebServer.Server.Http
     {
         public StatusCode StatusCode { get; init; }
         public HeaderCollection Headers { get; } = new HeaderCollection();
+        public CookieCollection Cookies { get; } = new CookieCollection();
         public string Body { get; set; }
         public Action<Request, Response> PreRenderAction { get; protected set; }
         public Response(StatusCode statusCode)
@@ -18,7 +19,7 @@ namespace MyFirstWebServer.Server.Http
             this.StatusCode = statusCode;
 
             this.Headers.Add(Header.Server, "My Web Server");
-            this.Headers.Add(Header.Data, $"{DateTime.UtcNow:r}");
+            this.Headers.Add(Header.Date, $"{DateTime.UtcNow:r}");
         }
         public override string ToString()
         {
@@ -27,6 +28,10 @@ namespace MyFirstWebServer.Server.Http
             foreach (var header in this.Headers)
             {
                 result.AppendLine(header.ToString());
+            }
+            foreach (var cookie in this.Cookies)
+            {
+                result.AppendLine($"{Header.SetCookie}: {cookie}");
             }
             result.AppendLine();
             if (!string.IsNullOrWhiteSpace(this.Body))

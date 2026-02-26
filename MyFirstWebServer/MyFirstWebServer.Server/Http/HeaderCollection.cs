@@ -26,14 +26,11 @@ namespace MyFirstWebServer.Server.Http
                 headers[name].Value = value;
             }
         }
-
         public int Count => this.headers.Count;
-
         public bool Contains(string name)
         {
             return this.headers.ContainsKey(name);
         }
-
         public void Add(string name, string value)
         {
 
