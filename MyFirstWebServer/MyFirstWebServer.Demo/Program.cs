@@ -23,7 +23,8 @@ namespace MyFirstWebServer.Demo
                 .MapGet("/login", new HtmlResponse(Form.HTML))
                 .MapPost("/login", new TextResponse("", AddFormDataAction))
                 .MapGet("/Content", new HtmlResponse(Form.DownloadForm))
-                .MapPost("/Content", new TextFileResponse(Form.FileName));
+                .MapPost("/Content", new TextFileResponse(Form.FileName))
+                .MapGet("/Cookies", new HtmlResponse("", StartUp.AddCookiesAction));
             });
             await server.Start();
         }
