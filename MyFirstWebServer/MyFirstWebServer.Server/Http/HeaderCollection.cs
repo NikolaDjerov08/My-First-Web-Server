@@ -33,7 +33,6 @@ namespace MyFirstWebServer.Server.Http
         }
         public void Add(string name, string value)
         {
-
             var headers = new Header(name, value);
             this.headers[name] = headers;
         }

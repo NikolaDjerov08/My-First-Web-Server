@@ -23,5 +23,4 @@ namespace MyFirstWebServer.Server.Http
         IEnumerator IEnumerable.GetEnumerator()
         => this.GetEnumerator();
     }
-
 }

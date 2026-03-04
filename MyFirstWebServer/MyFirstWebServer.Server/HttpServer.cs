@@ -12,38 +12,29 @@ namespace MyFirstWebServer.Server
         private readonly int port;
         private readonly TcpListener serverListener;
         private readonly RoutingTable routingTable;
-
         public HttpServer(string ipAddress, int port, Action<IRoutingTable> routingTableConfiguration)
         {
-
             this.ipAddress = IPAddress.Parse(ipAddress);
             this.port = port;
             this.serverListener = new TcpListener(this.ipAddress, port);
-
             routingTableConfiguration(this.routingTable = new RoutingTable());
-
         }
-
         public HttpServer(int port, Action<IRoutingTable> routes)
             : this("127.0.0.1", port, routes)
         {
         }
-
         public HttpServer(Action<IRoutingTable> routingTable)
             : this(8080, routingTable)
         {
         }
-
         public async Task Start()
         {
             this.serverListener.Start();
-
             Console.WriteLine($"Server started on port {port}");
             Console.WriteLine("Listening for requests ... ");
             while (true)
             {
                 var connection = await serverListener.AcceptTcpClientAsync();
-
                 _ = Task.Run(async () =>
                 {
                     var networkStream = connection.GetStream();
@@ -55,10 +46,20 @@ namespace MyFirstWebServer.Server
                     {
                         response.PreRenderAction(request, response);
                     }
+                    AddSession(request, response);
                     await WriteResponse(networkStream, response);
                     connection.Close();
                 });
-
+            }
+        }
+        private static void AddSession(Request request, Response response)
+        {
+            var sessionExists = request.Session
+                .ContainsKey(Session.SessionCurrentDateKey);
+            if (!sessionExists)
+            {
+                request.Session[Session.SessionCurrentDateKey] = DateTime.Now.ToString();
+                response.Cookies.Add(Session.SessionCookieName, request.Session.Id);
             }
         }
         private async Task WriteResponse(NetworkStream networkStream, Response response)
@@ -66,7 +67,6 @@ namespace MyFirstWebServer.Server
             var responseBytes = Encoding.UTF8.GetBytes(response.ToString());
             await networkStream.WriteAsync(responseBytes);
         }
-
         private async Task<string> ReadRequest(NetworkStream networkStream)
         {
             var bufferLingth = 1024;

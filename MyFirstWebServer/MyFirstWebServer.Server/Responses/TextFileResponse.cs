@@ -15,7 +15,6 @@ namespace MyFirstWebServer.Server.Responses
             FileName = fileName;
             this.Headers.Add(Header.ContentType, ContentType.PlainText);
         }
-
         public override string ToString()
         {
             if (File.Exists(FileName))

@@ -15,5 +15,4 @@ namespace MyFirstWebServer.Server.Responses
             this.Headers.Add(Header.Location, location);
         }
     }
-
 }

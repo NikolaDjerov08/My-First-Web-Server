@@ -21,10 +21,8 @@ namespace MyFirstWebServer.Server.Http
         {
             Guard.AgainstNull(name, nameof(name));
             Guard.AgainstNull(value, nameof(value));
-
             this.Name = name;
             this.Value = value;
-
         }
         public string Name { get; init; }
         public string Value { get; set; }

@@ -23,24 +23,7 @@ namespace MyFirstWebServer.Server.Http
                 [Method.Delete] = new Dictionary<string, Response>()
             };
         }
-        //public RoutingTable()
-        //{
-        //    this.routes = new()
-        //    {
-        //        [Method.Get] = new(),
-        //        [Method.Post] = new(),
-        //        [Method.Put] = new(),
-        //        [Method.Delete] = new()
-        //    };
-        //}                               \
-
         public IRoutingTable Map(string url, Method method, Response response)
-        //=> method switch
-        //{
-        //    Method.Get => this.MapGet(url, response),
-        //    Method.Post => this.MapPost(url, response),
-        //    _ => throw new InvalidOperationException(
-        //         $"Method '{method}' is not supported.")
         {
             switch (method)
             {
@@ -51,7 +34,6 @@ namespace MyFirstWebServer.Server.Http
                 default:
                     throw new InvalidOperationException($"Method '{method}' is not supported.");
             }
-
         }
         public IRoutingTable MapGet(string url, Response response)
         {
@@ -61,7 +43,6 @@ namespace MyFirstWebServer.Server.Http
 
             return this;
         }
-
         public IRoutingTable MapPost(string url, Response response)
         {
             Guard.AgainstNull(url, nameof(url));
@@ -70,7 +51,6 @@ namespace MyFirstWebServer.Server.Http
 
             return this;
         }
-
         public Response MatchRequest(Request request)
         {
             var requestMethod = request.Method;
