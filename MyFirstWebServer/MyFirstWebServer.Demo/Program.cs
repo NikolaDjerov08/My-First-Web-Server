@@ -117,12 +117,9 @@ namespace MyFirstWebServer.Demo
         private static void LoginAction(Request request, Response response)
         {
             request.Session.Clear();
-
             var bodyText = "";
-
             var usernameMatches = request.FromData["Username"] == Username;     
             var passworMatches = request.FromData["Possword"] == Password;      
-
             if (usernameMatches && passworMatches)                   
             {
                 request.Session[Session.SessionUserKey] = "MyUserId";
