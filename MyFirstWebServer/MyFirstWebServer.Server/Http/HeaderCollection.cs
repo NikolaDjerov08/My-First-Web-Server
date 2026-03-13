@@ -14,7 +14,6 @@ namespace MyFirstWebServer.Server.Http
         {
             headers = new Dictionary<string, Header>();
         }
-
         public string this[string name]
         {
             get
@@ -27,6 +26,7 @@ namespace MyFirstWebServer.Server.Http
             }
         }
         public int Count => this.headers.Count;
+
         public bool Contains(string name)
         {
             return this.headers.ContainsKey(name);
@@ -36,12 +36,10 @@ namespace MyFirstWebServer.Server.Http
             var headers = new Header(name, value);
             this.headers[name] = headers;
         }
-
         public IEnumerator<Header> GetEnumerator()
         {
             return headers.Values.GetEnumerator();
         }
-
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();

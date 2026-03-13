@@ -48,14 +48,12 @@ namespace MyFirstWebServer.Server.Http
             Guard.AgainstNull(url, nameof(url));
             Guard.AgainstNull(response, nameof(response));
             this.routes[Method.Post][url] = response;
-
             return this;
         }
         public Response MatchRequest(Request request)
         {
             var requestMethod = request.Method;
             var requestUrl = request.Url;
-
             if (!routes.ContainsKey(requestMethod)
                 || !routes[requestMethod].ContainsKey(requestUrl))
             {

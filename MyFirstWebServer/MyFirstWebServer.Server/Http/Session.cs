@@ -22,7 +22,6 @@ namespace MyFirstWebServer.Server.Http
         public Session(string id)
         {
             Guard.AgainstNull(id, nameof(id));
-
             this.Id = id;
             this.data = new Dictionary<string, string>();
         }

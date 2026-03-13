@@ -76,11 +76,9 @@ namespace MyFirstWebServer.Server.Http
                 if (headerParts.Length != 2)
                 {
                     throw new InvalidOperationException("Request is not valid.");
-
                 }
                 var headerName = headerParts[0];
                 var headerValue = headerParts[1].Trim();
-
                 headers.Add(headerName, headerValue);
             }
             return headers;
@@ -92,6 +90,7 @@ namespace MyFirstWebServer.Server.Http
                 && headers[Header.ContentType] == ContentType.FormUrlEncodet)
             {
                 var parsedForm = ParseFormData(body);
+
                 foreach (var (name, value) in parsedForm)
                 {
                     formCollection.Add(name, value);
@@ -110,7 +109,6 @@ namespace MyFirstWebServer.Server.Http
                 {
                     var name = HttpUtility.UrlDecode(parts[0]);
                     var value = HttpUtility.UrlDecode(parts[1]);
-
                     formData[name] = value;
                 }
             }
@@ -122,16 +120,12 @@ namespace MyFirstWebServer.Server.Http
             if (headers.Contains(Header.Cookie))
             {
                 var cookieHeader = headers[Header.Cookie];
-
                 var allCookies = cookieHeader.Split(';');
-
                 foreach (var cookie in allCookies)
                 {
                     var cookieParts = cookie.Split("=");
-
                     var cookieName = cookieParts[0].Trim();
                     var cookieValue = cookieParts[1].Trim();
-
                     cookies.Add(cookieName, cookieValue);
                 }
             }

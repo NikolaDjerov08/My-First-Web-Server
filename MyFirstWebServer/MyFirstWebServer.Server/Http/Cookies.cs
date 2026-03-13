@@ -9,19 +9,19 @@ namespace MyFirstWebServer.Server.Http
 {
     public class Cookie
     {
-    public Cookie(string name, string value) 
-    { 
-    Guard.AgainstNull(name, nameof(name));
-    Guard.AgainstNull(value, nameof(value));
-    this. Name = name;
-    this.Value = value;
-    }
-    public string Name { get; init; }
-    public string Value { get; init; }
+        public string Name { get; init; }
+        public string Value { get; init; }
+        public Cookie(string name, string value)
+        {
+            Guard.AgainstNull(name, nameof(name));
+            Guard.AgainstNull(value, nameof(value));
 
-    public override string ToString()
-    {
-         return $"{Name}={Value}";
-    }
+            Name = name;
+            Value = value;
+        }
+        public override string ToString()
+        {
+            return $"{Name}={Value}";
+        }
     }
 }

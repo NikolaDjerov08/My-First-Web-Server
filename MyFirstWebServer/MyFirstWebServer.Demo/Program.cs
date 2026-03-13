@@ -77,6 +77,7 @@ namespace MyFirstWebServer.Demo
             {
                 var cookieText = new StringBuilder();
                 cookieText.AppendLine("<h1>Cookies</h1>");
+
                 cookieText.Append("<table border='1'><tr><th>Name</th><th>Value</th></tr>");
                 foreach (var cookie in request.Cookies)
                 {
@@ -91,7 +92,6 @@ namespace MyFirstWebServer.Demo
             else
             {
                 bodyText = "<h1>Cookies set!</h1>";
-
                 response.Cookies.Add("My-Cookie", "My-Value");
                 response.Cookies.Add("My-Second-Cookie", "My-Second-Value");
             }
@@ -118,9 +118,9 @@ namespace MyFirstWebServer.Demo
         {
             request.Session.Clear();
             var bodyText = "";
-            var usernameMatches = request.FromData["Username"] == Username;     
-            var passworMatches = request.FromData["Possword"] == Password;      
-            if (usernameMatches && passworMatches)                   
+            var usernameMatches = request.FromData["Username"] == Username;
+            var passworMatches = request.FromData["Password"] == Password;      
+            if (usernameMatches && passworMatches)
             {
                 request.Session[Session.SessionUserKey] = "MyUserId";
                 response.Cookies.Add(Session.SessionCookieName, request.Session.Id);

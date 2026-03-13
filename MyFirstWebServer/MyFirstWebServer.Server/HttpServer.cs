@@ -84,7 +84,6 @@ namespace MyFirstWebServer.Server
                 requestBuilder.Append(Encoding.UTF8.GetString(buffer, 0, bytesRead));
             }
             while (networkStream.DataAvailable);
-
             return requestBuilder.ToString();
         }
     }

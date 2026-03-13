@@ -17,9 +17,8 @@ namespace MyFirstWebServer.Server.Http
         public Response(StatusCode statusCode)
         {
             this.StatusCode = statusCode;
-
             this.Headers.Add(Header.Server, "My Web Server");
-            this.Headers.Add(Header.Date, $"{DateTime.UtcNow:r}");
+            this.Headers.Add(Header.Data, $"{DateTime.UtcNow:r}");
         }
         public override string ToString()
         {
@@ -29,7 +28,7 @@ namespace MyFirstWebServer.Server.Http
             {
                 result.AppendLine(header.ToString());
             }
-            foreach (var cookie in this.Cookies)
+            foreach (var cookie in Cookies)
             {
                 result.AppendLine($"{Header.SetCookie}: {cookie}");
             }

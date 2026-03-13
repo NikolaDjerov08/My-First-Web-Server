@@ -13,7 +13,7 @@ namespace MyFirstWebServer.Server.Http
         public const string ContentLength = "Content-Length";
         public const string ContentDisposition = "Content-Disposition";
         public const string Cookie = "Cookie";
-        public const string Date = "Date";
+        public const string Data = "Data";
         public const string Location = "Location";
         public const string Server = "Server";
         public const string SetCookie = "Set-Cookie";
